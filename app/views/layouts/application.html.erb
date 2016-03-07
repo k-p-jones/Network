@@ -8,8 +8,16 @@
 </head>
 <body>
   
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<!-- FLASH MESSAGES -->
+
+<div>
+	<% flash.each do |key, value| %>
+    	<div>
+    		<%= value %>
+    	</div>
+	<% end %>
+</div>
+
 
 <%= yield %>
 

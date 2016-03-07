@@ -1,2 +1,9 @@
-<h1>Thoughts#index</h1>
-<p>Find me in app/views/thoughts/index.html.erb</p>
+<% @thoughts.each do |thought| %>
+    <p>
+        <%= thought.content %>
+        <%= link_to "Edit", edit_thought_path(thought) %>
+        <%= link_to "View", thought_path(thought) %>
+        <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
+    </p>
+    
+<% end %>

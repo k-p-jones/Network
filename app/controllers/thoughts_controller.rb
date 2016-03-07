@@ -19,15 +19,15 @@ class ThoughtsController < ApplicationController
   end 
   
   def show
-    @thought = Thought.find_by(params[:id])  
+    @thought = Thought.find_by_id(params[:id])  
   end
   
   def edit
-     @thought = Thought.find_by(params[:id])
+     @thought = Thought.find_by_id(params[:id])
   end
   
   def update
-     @thought = Thought.find_by(params[:id])
+     @thought = Thought.find_by_id(params[:id])
      if @thought.update_attributes(thought_params)
        flash[:success] = 'Thought updated!'
        redirect_to thought_path(@thought)
@@ -38,12 +38,18 @@ class ThoughtsController < ApplicationController
   end
   
   def destroy
-     @thought = Thought.find_by(params[:id])
+     @thought = Thought.find_by_id(params[:id])
      if @thought.destroy
        flash[:success] = 'Thought destroyed!'
      else
        flash[:warning] = 'There was a problem!'
      end
      redirect_to root_path
-  end 
+  end
+  
+  private
+  
+  def thought_params
+    params.require(:thought).permit(:content)
+  end
 end
