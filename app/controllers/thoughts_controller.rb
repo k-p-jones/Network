@@ -1,14 +1,17 @@
 class ThoughtsController < ApplicationController
+  
+  before_action :authenticate_user!
+  
   def index
-    @thoughts = Thought.all
+    @thoughts = current_user.thoughts
   end
   
   def new
-    @thought = Thought.new
+    @thought = current_user.thoughts.build
   end
   
   def create 
-    @thought = Thought.new(thought_params)
+    @thought = current_user.thoughts.build(thought_params)
     if @thought.save
       flash[:success] = 'Your thought has been published'
        redirect_to root_path
@@ -50,6 +53,6 @@ class ThoughtsController < ApplicationController
   private
   
   def thought_params
-    params.require(:thought).permit(:content)
+    params.require(:thought).permit(:content, :id)
   end
 end
