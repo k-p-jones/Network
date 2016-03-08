@@ -16,3 +16,8 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.content_wrapper {
+    background-color: #eaeaea;
+    min-height: 100vh;
+}

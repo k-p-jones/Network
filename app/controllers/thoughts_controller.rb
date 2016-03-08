@@ -3,7 +3,7 @@ class ThoughtsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @thoughts = current_user.thoughts
+    @thoughts = Thought.all
   end
   
   def new

@@ -1,9 +1,26 @@
-<% @thoughts.each do |thought| %>
-    <p>
-        <%= thought.content %>
-        <%= link_to "Edit", edit_thought_path(thought) %>
-        <%= link_to "View", thought_path(thought) %>
-        <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
-    </p>
-    
-<% end %>
+
+<div class="row">
+    <div class="col-sm-4">
+        <%= render 'profile'%>
+    </div>
+     <div class="col-sm-8">
+         <div class="text-center">
+             <h2>My Thoughts</h2>
+         </div>
+        <% @thoughts.each do |thought| %>
+            <div class="thought_wrapper">
+                <p>
+                    <%= thought.content %>
+                    <%= link_to "Edit", edit_thought_path(thought) %>
+                    <%= link_to "View", thought_path(thought) %>
+                    <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+
+
+
+
