@@ -16,8 +16,26 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-.content_wrapper {
+body, html {
     background-color: #eaeaea;
-    min-height: 100vh;
+}
+
+.navbar {
+    background-color: #4B67A1;
+    border: none;
+    border-radius: 0px;
+}
+
+.navbar-default {
+    
+    .navbar-brand {
+        color: #fff;
+    }
+    
+    .navbar-nav {
+        li > a {
+            color: #fff; 
+        }
+    }
+    
 }

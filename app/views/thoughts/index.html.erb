@@ -7,8 +7,15 @@
          <div class="text-center">
              <h2>My Thoughts</h2>
          </div>
+         <div>
+             <%= render "form" %>
+         </div>
         <% @thoughts.each do |thought| %>
             <div class="thought_wrapper">
+                <img src="http://placehold.it/40x40" class="thought_avatar">
+                <h4><%= thought.user.first_name.capitalize + " " + thought.user.last_name.capitalize %></h4>
+                <p class="text-muted"><%= time_ago_in_words(thought.created_at) %> ago.</p>
+                <hr>
                 <p>
                     <%= thought.content %>
                     <%= link_to "Edit", edit_thought_path(thought) %>

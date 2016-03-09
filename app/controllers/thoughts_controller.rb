@@ -3,7 +3,8 @@ class ThoughtsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @thoughts = Thought.all
+    @thoughts = Thought.all.order('created_at DESC')
+    @thought = current_user.thoughts.build
   end
   
   def new
