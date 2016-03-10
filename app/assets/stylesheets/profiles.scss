@@ -1,0 +1,20 @@
+// Place all the styles related to the Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile_wrapper {
+    padding: 10px;
+    margin: 10px 0px 10px 0px;
+    background-color: #fff;
+    border-radius: 6px;
+    
+    p {
+        margin: 0;
+    }
+    
+    img {
+        margin-top: 10px;
+        width: 100%;
+        height: auto;
+    }
+}

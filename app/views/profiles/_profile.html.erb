@@ -1,0 +1,10 @@
+
+<div class=" profile_wrapper text-center">
+  <img src="http://placehold.it/300x300">
+  <h3><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></h3>
+  <h5 class="text-muted">Works as a <%= @user.occupation %>.</h5>
+  <h5 class="text-muted">Lives in <%= @user.location %>.</h5>
+  <hr>
+  <h4>About <%= @user.first_name %></h4>
+  <h5 class="text-muted"><%= @user.bio %></h5>
+</div>

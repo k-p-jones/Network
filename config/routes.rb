@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'profiles/show'
+  
+
   devise_for :users
   resources :thoughts
   # The priority is based upon order of creation: first created -> highest priority.
