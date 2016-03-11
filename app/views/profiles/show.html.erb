@@ -17,11 +17,13 @@
                 <h4><%= thought.user.first_name.capitalize + " " + thought.user.last_name.capitalize %></h4>
                 <p class="text-muted"><%= time_ago_in_words(thought.created_at) %> ago.</p>
                 <hr>
+                <p><%= thought.content %> </p>
                 <p>
-                    <%= thought.content %>
-                    <%= link_to "Edit", edit_thought_path(thought) %>
                     <%= link_to "View", thought_path(thought) %>
-                    <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
+                    <% if current_user.id == thought.user_id %>
+                        <%= link_to "Edit", edit_thought_path(thought) %>
+                        <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
+                    <% end %>
                 </p>
             </div>
         <% end %>
