@@ -1,11 +1,32 @@
 <h2>Pending Requests</h2>
 <% @user.friendships.each do |friendship| %>
-    <h4><%= friendship.friend.first_name %></h4>
-    <%= link_to "Cancel Request", friendship, :method => :delete %>
+    <% if friendship.accepted == false %>
+        <h4><%= friendship.friend.first_name %></h4>
+        <%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %>
+    <% end %>
 <% end %>
 
 <h2>Friend Requests</h2>
-<% @requests.each do |x| %>
-    <h4><%= x.first_name %></h4>
-    <%= link_to "Accept", friendships_path(:friend_id => x.id), :method => :post, :class => "btn btn-success" %>
+<% @user.inverse_friendships.each do |friendship| %>
+    <% if friendship.accepted == false %>
+        <h4><%= friendship.user.first_name %></h4>
+        <%= form_for friendship, :url => {:controller => 'friendships', :action => 'accept_request', :id => friendship.id }, :html => {method: :post} do |f| %>
+            <%= f.submit "Accept", :class => "btn btn-success" %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<h2>Friends</h2>
+
+
+<% @my_friends.each do |friendship| %>
+    <% if friendship.accepted == true %>
+        <% if friendship.friend_id == current_user.id %>
+            <h2><%= friendship.user.first_name.capitalize %></h2>
+            <%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %>
+        <% else %>
+             <h2><%= friendship.friend.first_name.capitalize %></h2>
+             <%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %>
+        <% end %>
+    <% end %>
 <% end %>

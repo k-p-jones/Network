@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'profiles/show'
   get 'my_network/show'
+  post 'friendships/accept_request'
   
   resources :friendships
   devise_for :users
@@ -21,12 +22,7 @@ Rails.application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
+
   #     collection do
   #       get 'sold'
   #     end
