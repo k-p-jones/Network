@@ -1,6 +1,7 @@
 <h2>Pending Requests</h2>
-<% @pending.each do |x| %>
-    <h4><%= x.first_name %></h4>
+<% @user.friendships.each do |friendship| %>
+    <h4><%= friendship.friend.first_name %></h4>
+    <%= link_to "Cancel Request", friendship, :method => :delete %>
 <% end %>
 
 <h2>Friend Requests</h2>
