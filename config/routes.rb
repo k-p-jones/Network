@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get 'profiles/show'
+  get 'my_network/show'
   
-
+  resources :friendships
   devise_for :users
   resources :thoughts
   # The priority is based upon order of creation: first created -> highest priority.

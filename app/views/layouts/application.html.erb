@@ -28,6 +28,7 @@
 			  <% if user_signed_in? %>
   				<li><%= link_to "Profile", profiles_show_path(:id => current_user.id) %></li>
   				<li><%= link_to "Feed", root_path %></li>
+  				<li><%= link_to "Connect", my_network_show_path %></li>
   				<li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
 				<% end %>
 			</ul>

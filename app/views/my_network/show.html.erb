@@ -1,0 +1,10 @@
+<h2>Pending Requests</h2>
+<% @pending.each do |x| %>
+    <h4><%= x.first_name %></h4>
+<% end %>
+
+<h2>Friend Requests</h2>
+<% @requests.each do |x| %>
+    <h4><%= x.first_name %></h4>
+    <%= link_to "Accept", friendships_path(:friend_id => x.id), :method => :post, :class => "btn btn-success" %>
+<% end %>

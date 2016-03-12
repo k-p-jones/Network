@@ -1,0 +1,2 @@
+module MyNetworkHelper
+end
