@@ -3,7 +3,14 @@ class ThoughtsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @thoughts = Thought.all.order('created_at DESC')
+    @friends = current_user.friendships.where(:accepted => true).pluck(:friend_id)
+    @friends_inv = current_user.inverse_friendships.where(:accepted => true).pluck(:user_id)
+    @the_ids = []
+    @the_ids << @friends
+    @the_ids << @friends_inv
+    @the_ids.flatten
+    @users = User.where(:id => @the_ids)
+    @thoughts = Thought.where(:user_id => @the_ids).all.order('created_at DESC')
     @thought = current_user.thoughts.build
   end
   

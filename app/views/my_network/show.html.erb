@@ -30,3 +30,14 @@
         <% end %>
     <% end %>
 <% end %>
+
+<h2>Find Users</h2>
+<% @users.each do |user| %>
+    <% if user.id != current_user.id %>
+       <h4>
+           <%= user.first_name.capitalize + " " + user.last_name.capitalize %> 
+           <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>
+       </h4>
+    <% end %>
+<% end %>
+    
