@@ -1,6 +1,6 @@
 <%= form_for @thought do |f| %>
     <div class='field'>
-        <%= f.text_area :content, :class => "form-control", :rows => 3, :placeholder => "Whats on your mind?" %>
+        <%= f.text_area :content, :class => "form-control thought_content_input", :rows => 3, :placeholder => "Whats on your mind?" %>
         <%= f.submit "post", :class => "btn btn-success" %>
     </div>
 <% end %>

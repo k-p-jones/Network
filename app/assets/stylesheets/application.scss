@@ -16,6 +16,8 @@
  
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 body, html {
     background-color: #eaeaea;
 }
@@ -38,4 +40,11 @@ body, html {
         }
     }
     
+}
+
+.thought_button {
+    background-color: none;
+    border: none;
+    border-radius: 0px;
+    margin: 0px 0px 0px 0px;
 }

@@ -5,7 +5,6 @@ class MyNetworkController < ApplicationController
         @the_ids = []
         @the_ids << @friends
         @the_ids << @friends_inv
-        @the_ids.flatten
         @user = current_user
         @users = User.where.not(:id => @the_ids)
         @pending = current_user.friends

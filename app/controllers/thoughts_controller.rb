@@ -9,7 +9,6 @@ class ThoughtsController < ApplicationController
     @the_ids << @friends
     @the_ids << @friends_inv
     @the_ids << current_user.id
-    @the_ids.flatten
     @users = User.where(:id => @the_ids)
     @thoughts = Thought.where(:user_id => @the_ids).all.order('created_at DESC')
     @thought = current_user.thoughts.build
