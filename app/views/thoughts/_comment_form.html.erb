@@ -1,4 +1,11 @@
 <%= form_for ([@thought, @thought.comments.build]) do |f| %>
+    <% if @thought.errors.any? %>
+        <ul>
+          <% @thought.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
     <%= f.text_area :content, :placeholder => "Leave a comment", :rows => 3, :class => "form-control" %>
     <%= f.submit "Comment", :class => "btn btn-success" %>
 <% end %>    

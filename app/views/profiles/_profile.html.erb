@@ -1,7 +1,9 @@
 
 <div class=" profile_wrapper text-center">
+  <!-- Placeholder profile pic -->
   <img src="http://placehold.it/300x300">
-  <h3><%= @user.first_name.capitalize + " " + @user.last_name.capitalize %></h3>
+  <!-- Profile details -->
+  <h3><%= full_name(@user) %></h3>
   <h5 class="text-muted">Works as a <%= @user.occupation %>.</h5>
   <h5 class="text-muted">Lives in <%= @user.location %>.</h5>
   <hr>

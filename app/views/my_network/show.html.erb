@@ -1,13 +1,14 @@
+<!-- Pending friend requests -->
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="thought_wrapper text-center">
             <h3>Pending Requests</h3>
             <table class="table table-striped">
                 <tbody>
-                    <% @user.friendships.each do |friendship| %>
+                    <% current_user.friendships.each do |friendship| %>
                         <% if friendship.accepted == false %>
                             <tr>
-                                <td><%= friendship.friend.first_name.capitalize + " " + friendship.friend.last_name.capitalize %></td>
+                                <td><%= full_name(friendship.friend) %></td>
                                 <td><%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                             </tr>
                         <% end %>
@@ -18,13 +19,14 @@
     </div><!-- end col -->
 </div><!-- end row -->
 
+<!-- Recieved friend requests -->
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="thought_wrapper text-center">
             <h3>Friend Requests</h3>
             <table class="table table-striped">
                 <tbody>
-                    <% @user.inverse_friendships.each do |friendship| %>
+                    <% current_user.inverse_friendships.each do |friendship| %>
                         <% if friendship.accepted == false %>
                             <tr>
                                 <td><%= friendship.user.first_name.capitalize + " " + friendship.user.last_name.capitalize %></td>
@@ -42,7 +44,7 @@
     </div><!-- end col -->
 </div><!-- end row -->
 
-
+<!-- Confirmed friends -->
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="thought_wrapper text-center">
@@ -53,12 +55,12 @@
                         <% if friendship.accepted == true %>
                             <% if friendship.friend_id == current_user.id %>
                                 <tr>
-                                    <td><%= friendship.user.first_name.capitalize + " " + friendship.user.last_name.capitalize %></td>
+                                    <td><%= full_name(friendship.user) %></td>
                                     <td><%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                                 </tr>
                             <% else %>
                                 <tr>
-                                    <td><%= friendship.friend.first_name.capitalize + " " + friendship.friend.last_name.capitalize %></td>
+                                    <td><%= full_name(friendship.friend) %></td>
                                     <td><%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                                 </tr>
                             <% end %>    
@@ -70,6 +72,7 @@
     </div><!-- end col -->
 </div><!-- end row -->
 
+<!-- Users who are not friends -->
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div class="thought_wrapper text-center">
@@ -80,7 +83,7 @@
                         <% if user.id != current_user.id %>
                             <tr>
                                 <td>
-                                     <%= user.first_name.capitalize + " " + user.last_name.capitalize %> 
+                                     <%= full_name(user) %> 
                                      <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>
                                 </td>
                             </tr>

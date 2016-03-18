@@ -1,13 +1,16 @@
-
+<!-- News Feed -->
 <div class="row">
-     <div class="col-sm-8 col-sm-offset-2">
-         <div>
-             <%= render "form" %>
-         </div>
+    <div class="col-sm-8 col-sm-offset-2">
+        <!-- form for user thoughts -->
+        <div>
+            <%= render "form" %>
+        </div>
+        <!-- main loop -->
         <% @thoughts.each do |thought| %>
             <div class="thought_wrapper">
+                <!-- placeholder for profile pic -->
                 <img src="http://placehold.it/40x40" class="thought_avatar">
-                <h4><%= link_to "#{ thought.user.first_name.capitalize + " " + thought.user.last_name.capitalize }", profiles_show_path( :id => thought.user_id) %></h4>
+                <h4><%= link_to "#{ full_name(thought.user) }", profiles_show_path( :id => thought.user_id) %></h4>
                 <p class="text-muted"><%= time_ago_in_words(thought.created_at) %> ago.</p>
                 <div class="comment_counter">
                     <p><i class="fa fa-comment text-muted"></i>  <%= thought.comments.count %></p>
@@ -23,6 +26,7 @@
                     <% end %>
                 </p>
                 <hr>
+                <!-- button group -->
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         <div class="btn-group-justified" role="group">
@@ -34,13 +38,13 @@
                             <div class="btn-group">
                                 <button type="button" class="btn  btn-default thought_button"><i class="fa fa-comment"></i></button>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</div>
+                        </div><!-- end button group -->
+                    </div><!-- end col(buttons) -->
+                </div><!-- end row(buttons) -->
+            </div><!-- end thought wrapper -->
+        <% end %><!-- end main loop -->
+    </div><!-- end col -->
+</div><!-- end row -->
 
 
 

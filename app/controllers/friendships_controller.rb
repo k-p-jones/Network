@@ -16,7 +16,7 @@ class FriendshipsController < ApplicationController
       flash[:success] = "Removed friendship."
       redirect_to my_network_show_path
     end
-    
+    # Accept recieved friend request
     def accept_request
         @friendship = current_user.inverse_friendships.find_by_id(params[:id])
         @friendship.update_attributes(accepted: true)

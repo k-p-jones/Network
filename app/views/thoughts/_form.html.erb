@@ -1,4 +1,11 @@
 <%= form_for @thought do |f| %>
+    <% if @thought.errors.any? %>
+        <ul>
+          <% @thought.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
     <div class='field'>
         <%= f.text_area :content, :class => "form-control thought_content_input", :rows => 3, :placeholder => "Whats on your mind?" %>
         <%= f.submit "post", :class => "btn btn-success" %>

@@ -1,7 +1,9 @@
 <div class="row">
+    <!-- Profile info partial -->
     <div class="col-sm-4">
         <%= render 'profile'%>
     </div>
+    <!-- Users thoughts -->
      <div class="col-sm-8">
          <div class="text-center">
              <h2><%= @user.first_name.capitalize %>'s Thoughts</h2>
@@ -46,10 +48,10 @@
                                 <button type="button" class="btn btn-default thought_button"><i class="fa fa-share"></i></button>
                             </div>
                             <% end %>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</div>
+                        </div><!-- end button group -->
+                    </div><!-- end col(buttons) -->
+                </div><!-- end row(buttons) -->
+            </div><!-- end thought wrapper -->
+        <% end %><!-- end main thought loop -->
+     </div><!-- end col-sm-8 -->
+</div><!-- end row -->
