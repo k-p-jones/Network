@@ -30,7 +30,9 @@ class ThoughtsController < ApplicationController
   end 
   
   def show
-    @thought = Thought.find_by_id(params[:id])  
+    @thought = Thought.find_by_id(params[:id])
+    @comment = Comment.new
+    
   end
   
   def edit

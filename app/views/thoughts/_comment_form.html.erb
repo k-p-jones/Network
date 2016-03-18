@@ -1,0 +1,4 @@
+<%= form_for ([@thought, @thought.comments.build]) do |f| %>
+    <%= f.text_area :content, :placeholder => "Leave a comment", :rows => 3, :class => "form-control" %>
+    <%= f.submit "Comment", :class => "btn btn-success" %>
+<% end %>    

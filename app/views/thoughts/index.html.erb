@@ -9,6 +9,9 @@
                 <img src="http://placehold.it/40x40" class="thought_avatar">
                 <h4><%= link_to "#{ thought.user.first_name.capitalize + " " + thought.user.last_name.capitalize }", profiles_show_path( :id => thought.user_id) %></h4>
                 <p class="text-muted"><%= time_ago_in_words(thought.created_at) %> ago.</p>
+                <div class="comment_counter">
+                    <p><i class="fa fa-comment text-muted"></i>  <%= thought.comments.count %></p>
+                </div>
                 <hr>
                 <div class="thought_content">
                     <p><%= thought.content %> </p>
@@ -30,9 +33,6 @@
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn  btn-default thought_button"><i class="fa fa-comment"></i></button>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default thought_button"><i class="fa fa-share"></i></button>
                             </div>
                         </div>
                     </div>
