@@ -41,7 +41,9 @@
                                 <% end %>    
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn  btn-default thought_button"><i class="fa fa-comment"></i></button>
+                                <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
+                                    <i class="fa fa-comment"></i>
+                                <% end %>    
                             </div>
                             <% if current_user.id != @user.id %>
                             <div class="btn-group">
