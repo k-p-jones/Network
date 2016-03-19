@@ -52,7 +52,6 @@
             <table class="table table-striped">
                 <tbody>
                     <% @my_friends.each do |friendship| %>
-                        <% if friendship.accepted == true %>
                             <% if friendship.friend_id == current_user.id %>
                                 <tr>
                                     <td><%= full_name(friendship.user) %></td>
@@ -64,7 +63,6 @@
                                     <td><%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                                 </tr>
                             <% end %>    
-                        <% end %>
                     <% end %>    
                 </tbody>
             </table>

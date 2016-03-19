@@ -20,8 +20,11 @@ class FriendshipsController < ApplicationController
     def accept_request
         @friendship = current_user.inverse_friendships.find_by_id(params[:id])
         @friendship.update_attributes(accepted: true)
-        @friendship.save
-        flash[:success] = "You are now friends!"
+        if @friendship.save
+            flash[:success] = "You are now friends!"
+        else
+            flash[:warning] = "There was a problem"
+        end
         redirect_to my_network_show_path
     end
     

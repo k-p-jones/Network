@@ -12,8 +12,8 @@ class MyNetworkController < ApplicationController
         @pending = current_user.friends
         @requests = current_user.inverse_friends
         @friends = []
-        @friends << current_user.friendships 
-        @friends << current_user.inverse_friendships
+        @friends << current_user.friendships.where(:accepted => true) 
+        @friends << current_user.inverse_friendships.where(:accepted => true)
         @my_friends = @friends.flatten
     end
 end
