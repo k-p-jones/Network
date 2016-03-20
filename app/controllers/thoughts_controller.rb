@@ -23,13 +23,25 @@ class ThoughtsController < ApplicationController
   
   def create 
     @thought = current_user.thoughts.build(thought_params)
-    if @thought.save
-      flash[:success] = 'Your thought has been published'
-       redirect_to root_path
-    else
-      flash[:warning] = 'There was a problem, try again later!'
-      render 'new'
+    respond_to do |format|
+      format.html {
+        if @thought.save
+          flash[:success] = 'Your thought has been published'
+        redirect_to root_path
+        else
+          flash[:warning] = 'There was a problem, try again later!'
+          render 'new'
+        end
+      }
+      format.js {
+        if @thought.save
+          flash[:success] = 'Your thought has been published'
+        else
+          flash[:warning] = 'There was a problem, try again later!'
+        end
+      }
     end
+    
   end 
   
   def show
