@@ -1,2 +1,2 @@
-$("#feed_loop").prepend("<%= j render(@thought) %>");
+$("#feed_loop").prepend($("<%= j render(@thought) %>").hide().fadeIn(800));
 $("#feed_form").val("");

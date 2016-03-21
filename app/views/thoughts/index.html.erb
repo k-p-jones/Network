@@ -8,7 +8,7 @@
         <!-- main loop -->
         <div id="feed_loop">
             <% @thoughts.each do |thought| %>
-                <div class="thought_wrapper">
+                <div class="thought_wrapper" id="thought_<%= thought.id %>">
                     <!-- placeholder for profile pic -->
                     <img src="http://placehold.it/40x40" class="thought_avatar">
                     <h4><%= link_to "#{ full_name(thought.user) }", profiles_show_path( :id => thought.user_id) %></h4>
@@ -23,7 +23,7 @@
                     <p>
                         <% if current_user.id == thought.user_id %>
                             <%= link_to "Edit", edit_thought_path(thought) %>
-                            <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'} %>
+                            <%= link_to 'Destroy', thought_path(thought), method: :delete, data: {confirm: 'are you sure?'}, remote: true %>
                         <% end %>
                     </p>
                     <hr>

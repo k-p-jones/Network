@@ -34,11 +34,7 @@ class ThoughtsController < ApplicationController
         end
       }
       format.js {
-        if @thought.save
-          flash[:success] = 'Your thought has been published'
-        else
-          flash[:warning] = 'There was a problem, try again later!'
-        end
+         @thought.save
       }
     end
     
@@ -66,12 +62,20 @@ class ThoughtsController < ApplicationController
   
   def destroy
      @thought = Thought.find_by_id(params[:id])
-     if @thought.destroy
-       flash[:success] = 'Thought destroyed!'
-     else
-       flash[:warning] = 'There was a problem!'
+     respond_to do |format|
+      format.html {
+        if @thought.destroy
+        flash[:success] = 'Thought destroyed!'
+        else
+        flash[:warning] = 'There was a problem!'
+        end
+        redirect_to root_path
+      }
+      format.js {
+        @thought.destroy
+      }
      end
-     redirect_to root_path
+     
   end
   
   private
