@@ -2,8 +2,12 @@
 
 one:
   user_id: 1
-  friend_id: 1
+  friend_id: 2
 
 two:
+  user_id: 1
+  friend_id: 2
+  
+three:
   user_id: 1
   friend_id: 1
