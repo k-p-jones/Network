@@ -1,0 +1,15 @@
+<div id="comment_<%= comment.id %>">
+    <img src="http://placehold.it/40x40" class="thought_avatar">
+    <h4><%= link_to "#{ comment.user.first_name.capitalize + " " + comment.user.last_name.capitalize }", profiles_show_path( :id => comment.user_id) %></h4>
+    <p class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago.</p>
+    <hr>
+    <div class="thought_content">
+        <p><%= comment.content %></p>
+        <% if current_user.id == comment.user_id %>
+            <%= link_to "Delete", [ comment.thought, comment], :method => :delete, remote: true %>
+        <% elsif current_user.id == comment.thought.user_id %>
+            <%= link_to "Delete", [ comment.thought, comment], :method => :delete, remote: true %>
+        <% end %>
+    </div>
+    <hr>
+</div>
