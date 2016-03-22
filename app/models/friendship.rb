@@ -12,5 +12,4 @@ class Friendship < ActiveRecord::Base
         errors.add(:friend_id, 'cannot add yourself')
       end
     end
-
 end

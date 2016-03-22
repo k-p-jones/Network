@@ -5,13 +5,11 @@
             <h3>Pending Requests</h3>
             <table class="table table-striped">
                 <tbody>
-                    <% current_user.friendships.each do |friendship| %>
-                        <% if friendship.accepted == false %>
+                    <% current_user.pending_requests.each do |friendship| %>
                             <tr>
                                 <td><%= full_name(friendship.friend) %></td>
                                 <td><%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                             </tr>
-                        <% end %>
                     <% end %>    
                 </tbody>
             </table>
@@ -26,8 +24,7 @@
             <h3>Friend Requests</h3>
             <table class="table table-striped">
                 <tbody>
-                    <% current_user.inverse_friendships.each do |friendship| %>
-                        <% if friendship.accepted == false %>
+                    <% current_user.recieved_requests.each do |friendship| %>
                             <tr>
                                 <td><%= friendship.user.first_name.capitalize + " " + friendship.user.last_name.capitalize %></td>
                                 <td>
@@ -36,7 +33,6 @@
                                     <% end %>
                                 </td>
                             </tr>
-                        <% end %>
                     <% end %>    
                 </tbody>
             </table>
@@ -51,7 +47,7 @@
             <h3>My Friends</h3>
             <table class="table table-striped">
                 <tbody>
-                    <% @my_friends.each do |friendship| %>
+                    <% current_user.confirmed_friends.each do |friendship| %>
                             <% if friendship.friend_id == current_user.id %>
                                 <tr>
                                     <td><%= full_name(friendship.user) %></td>
