@@ -3,17 +3,9 @@ class ThoughtsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    # Gather all confirmed friends and include current user for the news feed
-    @friends = current_user.friendships.where(:accepted => true).pluck(:friend_id)
-    @friends_inv = current_user.inverse_friendships.where(:accepted => true).pluck(:user_id)
-    @the_ids = []
-    @the_ids << @friends
-    @the_ids << @friends_inv
-    @the_ids << current_user.id
-    @users = User.where(:id => @the_ids)
-    # Gather and order all thoughts created by confirmed friends
-    @thoughts = Thought.where(:user_id => @the_ids).all.order('created_at DESC')
-    # Create a new thought from the news feed
+    #include current user in the thoughts loop
+    @my_friends = current_user.my_friends << current_user.id
+    @thoughts = Thought.where(:user_id => @my_friends).all.order('created_at DESC')
     @thought = current_user.thoughts.build
   end
   

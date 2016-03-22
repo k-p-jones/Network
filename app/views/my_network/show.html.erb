@@ -26,7 +26,7 @@
                 <tbody>
                     <% current_user.recieved_requests.each do |friendship| %>
                             <tr>
-                                <td><%= friendship.user.first_name.capitalize + " " + friendship.user.last_name.capitalize %></td>
+                                <td><%= full_name(friendship.user) %></td>
                                 <td>
                                     <%= form_for friendship, :url => {:controller => 'friendships', :action => 'accept_request', :id => friendship.id }, :html => {method: :post} do |f| %>
                                         <%= f.submit "Accept", :class => "btn btn-success" %>
