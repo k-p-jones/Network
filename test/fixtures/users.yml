@@ -7,6 +7,9 @@
 me:
   email: email@daveemail.com
   id: 1
+  encrypted_password: password
+  first_name: Ken
+  last_name: Jones
 #
 dave: 
   email: myemail@email.com
