@@ -3,11 +3,25 @@
 one:
   user_id: 1
   friend_id: 2
-
-two:
+  accepted: true
+  
+duplicate:
   user_id: 1
   friend_id: 2
+  accepted: true
   
-three:
+two:
   user_id: 1
+  friend_id: 3
+  accepted: false
+  
+  
+four:
+  user_id: 4
   friend_id: 1
+  accepted: false
+  
+five:
+  user_id: 5
+  friend_id: 1
+  accepted: true
