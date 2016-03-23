@@ -17,7 +17,7 @@ class FriendshipsController < ApplicationController
       redirect_to my_network_show_path
     end
     # Accept recieved friend request
-    def accept_request
+    def update
         @friendship = current_user.inverse_friendships.find_by_id(params[:id])
         @friendship.update_attributes(accepted: true)
         if @friendship.save

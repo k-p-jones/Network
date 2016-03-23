@@ -10,6 +10,7 @@
   <h4>Bio</h4>
   <h5 class="text-muted"><%= @user.bio %></h5>
   <hr>
+  <!-- Tweak needed, have a confirm button and a cancel request button -->
   <% if @user.id == current_user.id %>
     <%= link_to "Edit Profile", edit_user_registration_path(), :class => "btn btn-success" %>
   <% elsif @friend_ids.include?(@user.id) == false %>

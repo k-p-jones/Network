@@ -26,6 +26,13 @@ class User < ActiveRecord::Base
       @my_friends = @friends.flatten
   end
   
+  def confirmed_friends_ids
+      @friends = []
+      @friends << self.friendships.where(:accepted => true).pluck(:friend_id) 
+      @friends << self.inverse_friendships.where(:accepted => true).pluck(:user_id)
+      @my_friends = @friends.flatten
+  end
+  
   def my_friends
     @active = self.friendships.pluck(:friend_id)
     @passive = self.inverse_friendships.pluck(:user_id)

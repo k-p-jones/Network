@@ -4,7 +4,7 @@ class ThoughtsController < ApplicationController
   
   def index
     #include current user in the thoughts loop
-    @my_friends = current_user.my_friends << current_user.id
+    @my_friends = current_user.confirmed_friends_ids << current_user.id
     @thoughts = Thought.where(:user_id => @my_friends).all.order('created_at DESC')
     @thought = current_user.thoughts.build
   end

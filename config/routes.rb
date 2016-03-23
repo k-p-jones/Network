@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   get 'profiles/show'
   get 'my_network/show'
-  post 'friendships/accept_request'
-  
   resources :friendships
   devise_for :users
   resources :thoughts do 

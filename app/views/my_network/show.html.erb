@@ -28,7 +28,7 @@
                             <tr>
                                 <td><%= full_name(friendship.user) %></td>
                                 <td>
-                                    <%= form_for friendship, :url => {:controller => 'friendships', :action => 'accept_request', :id => friendship.id }, :html => {method: :post} do |f| %>
+                                    <%= form_for friendship, :url => {:controller => 'friendships', :action => 'update', :id => friendship.id }, :html => {method: :put} do |f| %>
                                         <%= f.submit "Accept", :class => "btn btn-success" %>
                                     <% end %>
                                 </td>
