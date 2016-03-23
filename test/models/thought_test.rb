@@ -11,10 +11,11 @@ class ThoughtTest < ActiveSupport::TestCase
      assert @thought.save
   end
   
-  test 'the users id is saved to the thought' do 
+  test 'A thought belongs to a user' do 
     @thought = users(:dave).thoughts.build(:content => "Hello World")
     @thought.save
     assert @thought.user_id == users(:dave).id
+    assert_includes users(:dave).thoughts, @thought
   end
   
   test 'the thought comments are empty on creation' do 

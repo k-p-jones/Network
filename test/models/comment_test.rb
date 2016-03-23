@@ -19,4 +19,10 @@ class CommentTest < ActiveSupport::TestCase
     @comment = users(:me).comments.build(:thought_id => @thought.id, :content => "This is a comment")
     assert @thought.id == @comment.thought_id
   end
+  
+  test "comment should belong to a user" do 
+    @thought = thoughts(:one)
+    @comment = users(:me).comments.build(:thought_id => @thought.id, :content => "This is a comment")
+    assert_equal @comment.user_id, users(:me).id
+  end
 end
