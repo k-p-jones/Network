@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
     
+    before_action :authenticate_user!
+    
     def create
         @thought = Thought.find_by_id(params[:thought_id])
         @comment = @thought.comments.create(params[:comment].permit(:content))
