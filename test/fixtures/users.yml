@@ -10,11 +10,52 @@ me:
   encrypted_password: password
   first_name: Ken
   last_name: Jones
-#
+
 dave: 
-  email: myemail@email.com
+  email: email2@daveemail.com
   id: 2
+  encrypted_password: password
+  first_name: Dave
+  last_name: Jones
   
 steve:
-  email: email1@email.com
+  email: email3@daveemail.com
   id: 3
+  encrypted_password: password
+  first_name: steve
+  last_name: Jones
+  
+amy:
+  email: emai4l@daveemail.com
+  id: 4
+  encrypted_password: password
+  first_name: Amy
+  last_name: Jones
+
+frank: 
+  email: emai5l@daveemail.com
+  id: 5
+  encrypted_password: password
+  first_name: Frank
+  last_name: Jones
+  
+pearl:
+  email: email6@daveemail.com
+  id: 6
+  encrypted_password: password
+  first_name: pearl
+  last_name: Jones
+  
+alex:
+  email: email7@daveemail.com
+  id: 7
+  encrypted_password: password
+  first_name: Alex
+  last_name: Jones
+  
+pugsley:
+  email: emai8l@daveemail.com
+  id: 8
+  encrypted_password: password
+  first_name: pugsley
+  last_name: Jones

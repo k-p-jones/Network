@@ -29,3 +29,13 @@ five:
 six:
   user_id: 8
   friend_id: 6
+  
+seven:
+  user_id: 6
+  friend_id: 1
+  accepted: false
+  
+eight:
+  user_id: 1
+  friend_id: 8
+  accepted: false
