@@ -39,6 +39,6 @@ class UserTest < ActiveSupport::TestCase
     @ids = @user.my_friends
     assert_includes @ids, friendships(:one).friend_id
     assert_includes @ids, friendships(:two).friend_id
-    assert_not_includes @ids, friendships(:six).friend_id
+    assert_not_includes @ids, friendships(:six)
   end
 end
