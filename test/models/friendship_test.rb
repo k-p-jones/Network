@@ -7,8 +7,8 @@ class FriendshipTest < ActiveSupport::TestCase
   end
   
   test "a friendship is unique" do 
-    @friendship_one = friendships(:one)
-    @friendship_two = friendships(:duplicate)
+    @friendship_one = Friendship.new(:user_id => 3, :friend_id =>7)
+    @friendship_two = Friendship.new(:user_id => 3, :friend_id =>7)
     @friendship_one.save
     assert_not @friendship_two.save
   end
