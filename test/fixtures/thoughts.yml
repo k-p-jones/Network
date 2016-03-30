@@ -7,3 +7,5 @@ one:
 
 two:
   content: MyText
+  user_id: 9 
+  id: 2
