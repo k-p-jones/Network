@@ -6,7 +6,6 @@
           <% end %>
         </ul>
     <% end %>
-    <%= hidden_field_tag :referer, (params[:referer] || URI(request.referer).path ) %>
     <div class='field'>
         <%= f.text_area :content, :class => "form-control thought_content_input", :rows => 3, :placeholder => "Whats on your mind?", :id => "feed_form" %>
         <%= f.submit "post", :class => "btn btn-success" %>

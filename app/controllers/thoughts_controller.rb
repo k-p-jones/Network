@@ -19,7 +19,7 @@ class ThoughtsController < ApplicationController
       format.html {
         if @thought.save
           flash[:success] = 'Your thought has been published'
-          redirect_to params[:referer]
+          redirect_to :back
         else
           flash[:warning] = 'There was a problem, try again later!'
           render 'new'
