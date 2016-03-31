@@ -24,4 +24,26 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
    assert_equal current_path, user_session_path
   end
   
+  test "user logs in and creates a new thought from the feed page" do 
+    login_user
+    visit '/'
+    fill_in "thought[content]", with: "Hello World! This is a thought"
+    click_button "post"
+    within '#feed_loop' do 
+        assert page.has_content?("Hello World! This is a thought")
+    end
+  end
+  
+  #Profiles page currently redirects to feed when posting a thought. Must fix
+  
+  test "user logs in and posts a thought from their profile page" do 
+    login_user
+    click_link "Profile"
+    fill_in "thought[content]", with: "Hello Everyone!"
+    click_button "post"
+    within "#profile_thoughts_loop" do 
+        assert page.has_content?("Hello Everyone!")
+    end
+  end
+  
 end

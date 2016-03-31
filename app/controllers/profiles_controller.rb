@@ -8,5 +8,4 @@ class ProfilesController < ApplicationController
     @thoughts = @user.thoughts.order('created_at DESC')
     @thought = current_user.thoughts.build
   end
-
 end
