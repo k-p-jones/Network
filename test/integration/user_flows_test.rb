@@ -34,7 +34,6 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
   end
   
-  #Profiles page currently redirects to feed when posting a thought. Must fix
   
   test "user logs in and posts a thought from their profile page" do 
     login_user
@@ -46,4 +45,16 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
   end
   
+  test "user creates a post then deletes it" do
+    login_user
+    click_link "Profile"
+    fill_in "thought[content]", with: "Hello Everyone!"
+    click_button "post"
+    within "#profile_thoughts_loop" do 
+        assert page.has_content?("Hello Everyone!")
+        click_link "Destroy"
+        page.accept_alert
+        assert page.has_content?("Hello Everyone!")
+    end
+  end
 end
