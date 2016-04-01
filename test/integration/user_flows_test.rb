@@ -2,6 +2,7 @@ require 'test_helper'
 require 'capybara/rails'
 
 class UserFlowsTest < ActionDispatch::IntegrationTest
+  self.use_transactional_fixtures = false 
   
   def login_user
     @david = User.create(first_name: "David", last_name: "Smith", email: "david@mail.com", password: Devise::Encryptor.digest(User, "helloworld"))
@@ -12,7 +13,8 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert page.has_content?('Signed in successfully.')
   end
   
-  test "user logs in and browses site then signs out" do 
+  test "user logs in and browses site then signs out" do
+   Capybara.use_default_driver  
    login_user
    click_link "Connect"
    assert page.has_content?("#{users(:amy).first_name}")
@@ -25,6 +27,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   end
   
   test "user logs in and creates a new thought from the feed page" do 
+    Capybara.use_default_driver 
     login_user
     visit '/'
     fill_in "thought[content]", with: "Hello World! This is a thought"
@@ -36,6 +39,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   
   
   test "user logs in and posts a thought from their profile page" do 
+    Capybara.use_default_driver 
     login_user
     click_link "Profile"
     fill_in "thought[content]", with: "Hello Everyone!"
@@ -45,7 +49,8 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
   end
   
-  test "user creates a post then deletes it" do
+  test "user  posts then deletes a thought from the profile page" do
+    Capybara.current_driver = :selenium
     login_user
     click_link "Profile"
     fill_in "thought[content]", with: "Hello Everyone!"
@@ -54,7 +59,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
         assert page.has_content?("Hello Everyone!")
         click_link "Destroy"
         page.accept_alert
-        assert page.has_content?("Hello Everyone!")
     end
+    assert_not page.has_content?("Hello Everyone!")
   end
 end

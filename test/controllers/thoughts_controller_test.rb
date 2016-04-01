@@ -69,7 +69,7 @@ class ThoughtsControllerTest < ActionController::TestCase
     assert_difference('Thought.count') do 
       post :create, thought: { :content => "Hello World" }
     end
-    assert_redirected_to '/'
+    #redirect method tested in the user_flows_integration test as it is set to :back
   end
   
   test "should update the post" do
@@ -79,11 +79,11 @@ class ThoughtsControllerTest < ActionController::TestCase
     assert_redirected_to thought_path(@id)
   end
   
-  test "should destroy post" do 
+  test "should destroy thought" do 
     sign_in users(:me)
     assert_difference('Thought.count', -1) do 
       delete :destroy, id: thoughts(:one).id
     end
-    assert_redirected_to '/'
+    #redirect method tested in the user_flows_integration test as it is set to :back
   end
 end

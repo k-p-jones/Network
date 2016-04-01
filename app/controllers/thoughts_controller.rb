@@ -61,7 +61,7 @@ class ThoughtsController < ApplicationController
         else
         flash[:warning] = 'There was a problem!'
         end
-        redirect_to root_path
+        redirect_to :back
       }
       format.js {
         @thought.destroy
