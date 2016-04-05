@@ -66,10 +66,10 @@ class ThoughtsControllerTest < ActionController::TestCase
   
   test "should create a Thought" do 
     sign_in users(:me)
-    assert_difference('Thought.count') do 
+    assert_difference('Thought.count') do
+      @request.env['HTTP_REFERER'] = '/'
       post :create, thought: { :content => "Hello World" }
     end
-    #redirect method tested in the user_flows_integration test as it is set to :back
   end
   
   test "should update the post" do
@@ -81,7 +81,8 @@ class ThoughtsControllerTest < ActionController::TestCase
   
   test "should destroy thought" do 
     sign_in users(:me)
-    assert_difference('Thought.count', -1) do 
+    assert_difference('Thought.count', -1) do
+      @request.env['HTTP_REFERER'] = '/'
       delete :destroy, id: thoughts(:one).id
     end
     #redirect method tested in the user_flows_integration test as it is set to :back
