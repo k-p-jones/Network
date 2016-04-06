@@ -31,6 +31,17 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     click_link "Sign Out"
   end
 
+  def setup_friendship
+    login_david
+    click_link "Connect"
+    page.all(:link, "Add Friend")[8].click
+    click_link "Sign Out"
+    login_steve
+    click_link "Connect"
+    click_button "Accept"
+    click_link "Sign Out"
+  end
+
 
   
   test "user logs in and browses site then signs out" do
@@ -109,5 +120,24 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     click_link "Sign Out"
     login_david
     assert page.has_content?("This is Steve's thought!")
+  end
+
+  test "user can comment on a friends post" do 
+    Capybara.current_driver = :selenium
+    setup_steve_thought
+    setup_friendship
+    login_david
+    assert page.has_content?("This is Steve's thought!")
+    within "#feed_loop" do 
+      within ".thought_wrapper" do 
+        first(".thought_button").click
+      end
+    end
+    fill_in "comment[content]", with: "Hi Steve"
+    click_button "Comment"
+    assert page.has_content?("Hi Steve")
+    within ".comment_counter > p" do 
+      assert page.has_content?("1")
+    end
   end
 end

@@ -5,7 +5,7 @@
                 <h4><%= link_to "#{ full_name(@thought.user) }", profiles_show_path( :id => @thought.user_id) %></h4>
                 <p class="text-muted"><%= time_ago_in_words(@thought.created_at) %> ago.</p>
                 <div class="comment_counter">
-                    <p><i class="fa fa-comment text-muted"></i>  <%= @thought.comments.count %></p>
+                    <p><i class="fa fa-comment text-muted"></i>  <span id="the_count"><%= @thought.comments.count %></span></p>
                 </div>
                 <hr>
                 <div class="thought_content">

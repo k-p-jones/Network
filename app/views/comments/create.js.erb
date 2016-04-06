@@ -1,2 +1,5 @@
+var comment_count = "<%= @thought.comments.count %>"
 $("#comments_loop").append($("<%= j render(@comment) %>").hide().fadeIn(600));
+$("#the_count").hide();
+$(".comment_counter p").append(comment_count);
 $("#comment_form").val("");
