@@ -164,6 +164,9 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
     sleep(1)
     assert_not page.has_content?("Hi Steve")
+    within ".comment_counter > p" do 
+      assert page.has_content?("0")
+    end
   end
 
   test "user deletes someone else's comment on their thought" do 
@@ -196,6 +199,10 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
       click_link "Delete"
       sleep(1)
       assert_not page.has_content?("Hi Steve")
+    end
+    within ".comment_counter > p" do 
+      assert page.has_content?("0")
     end  
   end
+
 end
