@@ -108,7 +108,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "user friendship is sent and accepted, can then see friends thoughts" do 
-    Capybara.current_driver = :selenium
+    Capybara.use_default_driver
     setup_steve_thought
     login_david
     click_link "Connect"
@@ -122,7 +122,26 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert page.has_content?("This is Steve's thought!")
   end
 
-  test "user can comment on a friends post" do 
+  test "user comment's on a friends post" do 
+    Capybara.use_default_driver
+    setup_steve_thought
+    setup_friendship
+    login_david
+    assert page.has_content?("This is Steve's thought!")
+    within "#feed_loop" do 
+      within ".thought_wrapper" do 
+        first(".thought_button").click
+      end
+    end
+    fill_in "comment[content]", with: "Hi Steve"
+    click_button "Comment"
+    assert page.has_content?("Hi Steve")
+    within ".comment_counter > p" do 
+      assert page.has_content?("1")
+    end
+  end
+
+  test "user deletes their own comment" do 
     Capybara.current_driver = :selenium
     setup_steve_thought
     setup_friendship
@@ -139,5 +158,44 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     within ".comment_counter > p" do 
       assert page.has_content?("1")
     end
+    within("#comments_loop") do 
+      assert page.has_content?("Hi Steve")
+      click_link "Delete"
+    end
+    sleep(1)
+    assert_not page.has_content?("Hi Steve")
+  end
+
+  test "user deletes someone else's comment on their thought" do 
+    Capybara.current_driver = :selenium
+    setup_steve_thought
+    setup_friendship
+    login_david
+    assert page.has_content?("This is Steve's thought!")
+    within "#feed_loop" do 
+      within ".thought_wrapper" do 
+        first(".thought_button").click
+      end
+    end
+    fill_in "comment[content]", with: "Hi Steve"
+    click_button "Comment"
+    assert page.has_content?("Hi Steve")
+    within ".comment_counter > p" do 
+      assert page.has_content?("1")
+    end
+    click_link "Sign Out"
+    login_steve
+    within "#feed_loop" do 
+      within ".thought_wrapper" do 
+        first(".thought_button").click
+      end
+    end
+    within("#comments_loop") do 
+      assert page.find(".the_comment_content")
+      assert page.has_content?("Hi Steve")
+      click_link "Delete"
+      sleep(1)
+      assert_not page.has_content?("Hi Steve")
+    end  
   end
 end
