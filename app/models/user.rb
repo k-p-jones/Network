@@ -14,9 +14,23 @@ class User < ActiveRecord::Base
   def pending_requests
       self.friendships.where(:accepted => false)
   end
+
+  def pending_requests_ids
+      @array = self.pending_requests.pluck(:friend_id)
+      @ids = []
+      @ids << @array
+      @pending_requests_ids = @ids.flatten
+  end
   
   def recieved_requests
       self.inverse_friendships.where(:accepted => false)
+  end
+
+  def recieved_requests_ids
+      @array = self.recieved_requests.pluck(:user_id)
+      @ids = []
+      @ids << @array
+      @pending_requests_ids = @ids.flatten
   end
  
   def confirmed_friends
