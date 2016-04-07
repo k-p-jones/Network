@@ -4,10 +4,10 @@
         <div class="thought_wrapper text-center">
             <h3>Pending Requests</h3>
             <table class="table table-striped">
-                <tbody>
+                <tbody id="pending_requests">
                     <% current_user.pending_requests.each do |friendship| %>
                             <tr>
-                                <td><%= full_name(friendship.friend) %></td>
+                                <td><%= link_to full_name(friendship.friend), profiles_show_path(:id => friendship.friend.id) %></td>
                                 <td><%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                             </tr>
                     <% end %>    
@@ -23,10 +23,10 @@
         <div class="thought_wrapper text-center">
             <h3>Friend Requests</h3>
             <table class="table table-striped">
-                <tbody>
+                <tbody id="recieved_requests">
                     <% current_user.recieved_requests.each do |friendship| %>
                             <tr>
-                                <td><%= full_name(friendship.user) %></td>
+                                <td><%= link_to full_name(friendship.user), profiles_show_path(:id => friendship.user.id) %></td>
                                 <td>
                                     <%= form_for friendship, :url => {:controller => 'friendships', :action => 'update', :id => friendship.id }, :html => {method: :put} do |f| %>
                                         <%= f.submit "Accept", :class => "btn btn-success" %>
@@ -46,16 +46,16 @@
         <div class="thought_wrapper text-center">
             <h3>My Friends</h3>
             <table class="table table-striped">
-                <tbody>
+                <tbody id="confirmed_friends">
                     <% current_user.confirmed_friends.each do |friendship| %>
                             <% if friendship.friend_id == current_user.id %>
                                 <tr>
-                                    <td><%= full_name(friendship.user) %></td>
+                                    <td><%= link_to full_name(friendship.user), profiles_show_path(:id => friendship.user.id) %></td>
                                     <td><%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                                 </tr>
                             <% else %>
                                 <tr>
-                                    <td><%= full_name(friendship.friend) %></td>
+                                    <td><%= link_to full_name(friendship.friend), profiles_show_path(:id => friendship.friend_id) %></td>
                                     <td><%= link_to "Unfriend", friendship, :method => :delete, :class => "btn btn-warning" %></td>
                                 </tr>
                             <% end %>    
@@ -72,12 +72,12 @@
         <div class="thought_wrapper text-center">
             <h3>Find Friends</h3>
             <table class="table table-striped">
-                <tbody>
+                <tbody id="users_list">
                     <% @users.order("last_name ASC").each do |user| %>
                         <% if user.id != current_user.id %>
                             <tr>
                                 <td>
-                                     <%= full_name(user) %> 
+                                     <%= link_to full_name(user), profiles_show_path(:id => user.id) %> 
                                      <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>
                                 </td>
                             </tr>

@@ -31,6 +31,14 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     click_link "Sign Out"
   end
 
+  def setup_david_thought
+    login_david
+    visit '/'
+    fill_in "thought[content]", with: "This is Dave's thought!"
+    click_button "post"
+    click_link "Sign Out"
+  end
+
   def setup_friendship
     login_david
     click_link "Connect"
@@ -203,6 +211,24 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     within ".comment_counter > p" do 
       assert page.has_content?("0")
     end  
+  end
+
+  test "user deletes a friendship, can no longer see their thoughts" do 
+    Capybara.use_default_driver
+    setup_david_thought
+    setup_friendship
+    login_steve
+    click_link "Connect"
+    within("#confirmed_friends") do 
+      click_link "Unfriend"
+    end
+    within("#users_list") do 
+      assert page.has_content?("David Smith")
+    end
+    click_link "Feed"
+    within("#feed_loop") do 
+      assert_not page.has_content?("This is Dave's thought!")
+    end
   end
 
 end
