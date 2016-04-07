@@ -25,6 +25,9 @@
       <% end %>
     <% end %>    
   <% else %>
-    <h5 class="text-muted">You are friends!</h5>  
+    <h5 class="text-muted">You are friends!</h5> 
+    <% @confirmed.each do |friendship| %>
+      <%= link_to "End Friendship", friendship, :method => :delete, :class => "btn btn-warning" %>
+    <% end %>
   <% end %>
 </div>

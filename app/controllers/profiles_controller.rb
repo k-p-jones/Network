@@ -9,5 +9,6 @@ class ProfilesController < ApplicationController
     @thought = current_user.thoughts.build
     @pending = current_user.friendships.where(:friend_id == @user.id)
     @recieved = current_user.inverse_friendships.where(:user_id == @user.id)
+    @confirmed = current_user.confirmed_friends.find(:conditions => ["user_id = ? OR friend_id = ?", @user.id])
   end
 end
