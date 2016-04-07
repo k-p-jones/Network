@@ -46,6 +46,17 @@ class User < ActiveRecord::Base
       @friends << self.inverse_friendships.where(:accepted => true).pluck(:user_id)
       @my_friends = @friends.flatten
   end
+
+  def confirmed_profile_friendship(user_id, current_user)
+    self.confirmed_friends.select do |x|
+      if x["friend_id"] == user_id && x["user_id"] == current_user.id
+        @friendship = x
+      elsif x["user_id"] == user_id && x["friend_id"] == current_user.id
+        @friendship = x
+      end
+    end
+    return @friendship
+  end
   
   def my_friends
     @active = self.friendships.pluck(:friend_id)

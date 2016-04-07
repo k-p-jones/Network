@@ -6,7 +6,7 @@ class FriendshipsController < ApplicationController
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
         if @friendship.save
             flash[:success] = "Added friend."
-            redirect_to my_network_show_path
+            redirect_to :back
         else
             flash[:warning] = "Unable to add friend."
             redirect_to :back
@@ -19,7 +19,7 @@ class FriendshipsController < ApplicationController
       flash[:success] = "Removed friendship."
       redirect_to :back
     end
-    # Accept recieved friend request
+    
     def update
         @friendship = current_user.inverse_friendships.find_by_id(params[:id])
         @friendship.update_attributes(accepted: true)
