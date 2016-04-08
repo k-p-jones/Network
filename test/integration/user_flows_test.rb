@@ -231,4 +231,51 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "User sends a friend request, cancel request button appears in the network and profile pages" do
+    Capybara.use_default_driver
+    login_david
+    click_link "Connect"
+    page.all(:link, "Add Friend")[8].click
+    within("#pending_requests") do 
+      assert page.has_content?("Cancel Request")
+    end
+    click_link "Steve Smith"
+    within(".profile_wrapper") do 
+      assert page.has_content?("Cancel Request")
+    end
+  end
+
+  test "user recieves a friend request, accept button appears in network and profile pages" do
+    Capybara.use_default_driver 
+    login_david
+    click_link "Connect"
+    page.all(:link, "Add Friend")[8].click
+    click_link "Sign Out"
+    login_steve
+    click_link "Connect"
+    within("#recieved_requests") do 
+      assert page.has_content?("David Smith")
+      assert find(".btn").visible?
+    end
+    click_link "David Smith"
+    within(".profile_wrapper") do 
+      assert find(".btn").visible?
+    end
+  end
+
+  test "user has friendship, delete button appears on both network and profile pages" do 
+    Capybara.use_default_driver
+    setup_friendship
+    login_david
+    click_link "Connect"
+    within("#confirmed_friends") do 
+      assert page.has_content?("Steve Smith")
+      assert page.has_content?("Unfriend")
+    end
+    click_link "Steve Smith"
+    within(".profile_wrapper") do 
+      assert page.has_content?("You are friends!")
+      assert page.has_content?("End Friendship")
+    end
+  end
 end
