@@ -35,22 +35,23 @@
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         <div class="btn-group-justified" role="group">
-                            <div class="btn-group">
-                                <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
-                                    <i class="fa fa-eye"></i>
-                                <% end %>    
-                            </div>
-                            <div class="btn-group">
-                                <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
-                                    <i class="fa fa-comment"></i>
-                                <% end %>    
-                            </div>
-                            <% if current_user.id != @user.id %>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default thought_button"><i class="fa fa-share"></i></button>
-                            </div>
-                            <% end %>
-                        </div><!-- end button group -->
+                                <div class="btn-group">
+                                    <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
+                                        <i class="fa fa-comment"></i> 
+                                    <% end %>    
+                                </div>
+                                <div class="btn-group">
+                                    <% if current_user.has_liked(thought.id) %>
+                                        <%= link_to like_path(thought), method: :delete, :class => "btn btn-default thought_button" do %>
+                                            <p><i class="fa fa-thumbs-o-up liked fa-lg"></i>  <%= thought.likes.count %></p>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to like_thought_path(thought), method: :post, :class => "btn btn-default thought_button" do %>
+                                            <p><i class="fa fa-thumbs-o-up"></i>  <%= thought.likes.count %></p>
+                                        <% end %>
+                                    <% end %>    
+                                </div>
+                            </div><!-- end button group -->
                     </div><!-- end col(buttons) -->
                 </div><!-- end row(buttons) -->
             </div><!-- end thought wrapper -->

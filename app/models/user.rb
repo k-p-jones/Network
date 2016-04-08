@@ -67,4 +67,12 @@ class User < ActiveRecord::Base
     @the_ids << @passive
     @my_friends = @the_ids.flatten
   end
+
+  # Like methods
+  def has_liked(thought_id)
+    @likes = self.likes.pluck(:thought_id)
+    if @likes.include?(thought_id)
+      return true
+    end
+  end
 end

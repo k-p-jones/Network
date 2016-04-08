@@ -32,13 +32,24 @@
                         <div class="col-sm-12 text-center">
                             <div class="btn-group-justified" role="group">
                                 <div class="btn-group">
-                                    <%= link_to like_thought_path(thought), method: :post, :class => "btn btn-default thought_button" do %>
-                                        <i class="fa fa-eye"></i>
+                                    <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
+                                        <i class="fa fa-comment"></i> 
                                     <% end %>    
                                 </div>
                                 <div class="btn-group">
-                                    <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
-                                        <i class="fa fa-comment"></i>
+                                    <% if current_user.has_liked(thought.id) %>
+                                        <%= link_to like_path(thought), method: :delete, :class => "btn btn-default thought_button" do %>
+                                            <p><i class="fa fa-thumbs-o-up liked fa-lg"></i>  <%= thought.likes.count %></p>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to like_thought_path(thought), method: :post, :class => "btn btn-default thought_button" do %>
+                                            <p>
+                                                <i class="fa fa-thumbs-o-up"></i>
+                                                <% if thought.likes.count > 0 %>  
+                                                    <%= thought.likes.count %>
+                                                <% end %>
+                                            </p>
+                                        <% end %>
                                     <% end %>    
                                 </div>
                             </div><!-- end button group -->
