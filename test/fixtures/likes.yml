@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  thought_id: 1
+  user_id: 
+  thought_id: 
+
+two:
+  user_id: 1
+  thought_id: 1
+  user_id: 
+  thought_id: 

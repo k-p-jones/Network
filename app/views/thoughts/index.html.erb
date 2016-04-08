@@ -32,7 +32,7 @@
                         <div class="col-sm-12 text-center">
                             <div class="btn-group-justified" role="group">
                                 <div class="btn-group">
-                                    <%= link_to thought_path(thought), :class => "btn btn-default thought_button" do %>
+                                    <%= link_to like_thought_path(thought), method: :post, :class => "btn btn-default thought_button" do %>
                                         <i class="fa fa-eye"></i>
                                     <% end %>    
                                 </div>

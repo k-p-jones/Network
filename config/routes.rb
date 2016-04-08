@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+
   get 'profiles/show'
   get 'my_network/show'
   resources :friendships
+  resources :likes
   devise_for :users
   resources :thoughts do 
     resources :comments
+    member do 
+      post 'like', to: 'likes#create'
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
