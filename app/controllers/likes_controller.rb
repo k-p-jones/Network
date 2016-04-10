@@ -12,7 +12,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = Like.find_by(params[:id])
+    @like = Like.find_by(user_id: params[:user_id], thought_id: params[:thought_id])
     if @like.destroy
       flash[:success] = 'Unliked thought!'
     else
