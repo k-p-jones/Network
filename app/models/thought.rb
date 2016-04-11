@@ -5,4 +5,9 @@ class Thought < ActiveRecord::Base
     has_many :users_who_like, :through => :likes, :source => :user
     
     validates :content, presence: true
+    
+    def the_likes
+        @likes = self.likes.count - 1
+        return @likes 
+    end
 end
