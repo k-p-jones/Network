@@ -1,0 +1,56 @@
+<div id="button_section_content_<%= @thought.id %>">
+    <div class="row">
+        <div class="col-sm-12">
+            <% if @thought.likes.count > 0 %>
+                <% if current_user.has_liked(@thought.id) %>
+                    <% if @thought.likes.count == 1 %>
+                        <p class="text-muted">You like this.</p>
+                    <% elsif @thought.likes.count == 2 %>
+                        <p class="text-muted">You and 1 other person like this</p>
+                    <% elsif @thought.likes.count > 2 %>
+                        <p class="text-muted">You and <%= @thought.the_likes %> other people like this.</p>
+                    <% end %>
+                <% else %>
+                    <% if @thought.likes.count == 1 %>
+                        <p class="text-muted">1 person likes this.</p>
+                    <% elsif @thought.likes.count > 1 %>
+                        <p class="text-muted"><%= @thought.likes.count %> people like this.</p>
+                    <% end %>
+                <% end %>
+                <hr>
+            <% end %>
+        </div>
+    </div>
+    <!-- button group -->
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="btn-group-justified" role="group">
+                <div class="btn-group">
+                    <%= link_to thought_path(@thought), :class => "btn btn-default thought_button" do %>
+                        <i class="fa fa-comment"></i> 
+                    <% end %>    
+                </div>
+                <div class="btn-group">
+                    <% if current_user.has_liked(@thought.id) %>
+                        <div>
+                            <%= link_to like_path(@thought, :thought_id => @thought.id, :user_id => current_user.id ), remote: true, method: :delete, :class => "btn btn-default thought_button" do %>
+                                <p><i class="fa fa-thumbs-o-up liked fa-lg"></i>  <%= @thought.likes.count %></p>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <div>
+                            <%= link_to like_thought_path(@thought), remote: true, method: :post, :class => "btn btn-default thought_button" do %>
+                                <p>
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    <% if @thought.likes.count > 0 %>  
+                                         <%= @thought.likes.count %>
+                                     <% end %>
+                                </p>
+                            <% end %>
+                        </div>
+                    <% end %>    
+                </div>
+            </div><!-- end button group -->
+        </div><!-- end col(buttons) -->
+    </div><!-- end row(buttons) -->
+</div>    

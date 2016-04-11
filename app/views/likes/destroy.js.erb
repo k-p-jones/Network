@@ -1,0 +1,2 @@
+$("#button_section_content_<%= params[:id] %>").remove();
+$("#button_section_<%= params[:id] %>").append("<%= j render(partial: 'buttons') %>");
