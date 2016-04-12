@@ -1,7 +1,5 @@
 ToDo
 
 * Write controller, unit and integration tests for the like functionality
-* Finish making all actions respond to AJAX(Just Network page left)
+* Finish making all actions respond to AJAX
 * Let users have an avatar
-* Test avatars
-* FINISH :-)
