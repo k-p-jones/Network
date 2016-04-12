@@ -1,0 +1,4 @@
+<div id="profile_buttons_content">
+        <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), remote: true, :method => :post, :class => "btn btn-success" %>
+        <%= @user.id %>
+</div>

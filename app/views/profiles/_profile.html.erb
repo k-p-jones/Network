@@ -10,22 +10,26 @@
   <h4>Bio</h4>
   <h5 class="text-muted"><%= @user.bio %></h5>
   <hr>
-  <% if @user.id == current_user.id %>
-    <%= link_to "Edit Profile", edit_user_registration_path(), :class => "btn btn-success" %>
-  <% elsif @friend_ids.include?(@user.id) == false %>
-    <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), :method => :post, :class => "btn btn-success" %>
-  <% elsif current_user.pending_requests_ids.include?(@user.id) %>
-    <% @pending.each do |friendship| %>
-      <%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %>
-    <% end %>
-  <% elsif current_user.recieved_requests_ids.include?(@user.id) %>
-    <% @recieved.each do |friendship| %>
-      <%= form_for friendship, :url => {:controller => 'friendships', :action => 'update', :id => friendship.id }, :html => {method: :put} do |f| %>
-        <%= f.submit "Accept", :class => "btn btn-success" %>
+  <div id="profile_buttons">
+    <div id="profile_buttons_content">
+      <% if @user.id == current_user.id %>
+        <%= link_to "Edit Profile", edit_user_registration_path(), :class => "btn btn-success" %>
+      <% elsif @friend_ids.include?(@user.id) == false %>
+        <%= link_to "Add Friend", friendships_path(:friend_id => @user.id), remote: true, :method => :post, :class => "btn btn-success" %>
+      <% elsif current_user.pending_requests_ids.include?(@user.id) %>
+        <% @pending.each do |friendship| %>
+          <%= link_to "Cancel Request", friendship, remote: true, :method => :delete, :class => "btn btn-warning" %>
+        <% end %>
+      <% elsif current_user.recieved_requests_ids.include?(@user.id) %>
+        <% @recieved.each do |friendship| %>
+          <%= form_for friendship, :url => {:controller => 'friendships', :action => 'update', :id => friendship.id }, :html => {method: :put}, remote: true do |f| %>
+            <%= f.submit "Accept", :class => "btn btn-success" %>
+          <% end %>
+        <% end %>    
+      <% else %>
+        <h5 class="text-muted">You are friends!</h5>
+        <%= link_to "End Friendship", @confirmed, remote: true, :method => :delete, :class => "btn btn-warning" %> 
       <% end %>
-    <% end %>    
-  <% else %>
-    <h5 class="text-muted">You are friends!</h5>
-      <%= link_to "End Friendship", @confirmed, :method => :delete, :class => "btn btn-warning" %> 
-  <% end %>
+    </div>
+  </div>  
 </div>
