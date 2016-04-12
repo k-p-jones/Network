@@ -6,10 +6,10 @@
             <table class="table table-striped">
                 <tbody id="pending_requests">
                     <% current_user.pending_requests.each do |friendship| %>
-                            <tr>
-                                <td><%= link_to full_name(friendship.friend), profiles_show_path(:id => friendship.friend.id) %></td>
-                                <td><%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %></td>
-                            </tr>
+                        <tr>
+                            <td><%= link_to full_name(friendship.friend), profiles_show_path(:id => friendship.friend.id) %></td>
+                            <td><%= link_to "Cancel Request", friendship, :method => :delete, :class => "btn btn-warning" %></td>
+                        </tr>
                     <% end %>    
                 </tbody>
             </table>
