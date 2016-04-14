@@ -3,12 +3,9 @@ class FriendshipsController < ApplicationController
     before_action :authenticate_user!
     
     def create
-        @test = current_user.friendships.last
         @user = User.find_by(params[:id])
         @friend_ids = current_user.my_friends
         @pending = current_user.friendships.where('friend_id= ?', params[:friend_id])
-        @recieved = current_user.inverse_friendships.where('user_id= ?', @user.id)
-        @confirmed = current_user.confirmed_profile_friendship(@user.id, current_user)
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
         respond_to do |format|
             format.html {
@@ -23,15 +20,25 @@ class FriendshipsController < ApplicationController
 
             format.js {
                 @friendship.save
+                flash[:success] = "Added Friend"
             }
         end
     end
 
     def destroy
       @friendship = Friendship.find_by_id(params[:id])
-      @friendship.destroy
-      flash[:success] = "Removed friendship."
-      redirect_to :back
+      respond_to do |format|
+        format.html {
+           @friendship.destroy
+           flash[:success] = "Removed friendship."
+           redirect_to :back 
+        }
+        format.js {
+            @friendship.destroy
+            flash[:success] = "Removed friendship"
+        }
+      end
+      
     end
     
     def update

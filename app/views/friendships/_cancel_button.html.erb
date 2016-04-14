@@ -1,1 +1,1 @@
-<%= link_to "Cancel Request", friendship_path(@pending.first), :method => :delete, :class => "btn btn-warning" %>
+<%= link_to "Cancel Request", friendship_path(@pending.first, :friend_id => params[:friend_id]), remote: true, :method => :delete, :class => "btn btn-warning" %>
