@@ -28,7 +28,7 @@
         <% end %>    
       <% else %>
         <h5 class="text-muted">You are friends!</h5>
-          <%= link_to "End Friendship", @confirmed, :method => :delete, :class => "btn btn-warning" %> 
+          <%= link_to "End Friendship", friendship_path( @confirmed, :friend_id => @user.id ), :friend_id => params[:friend_id], remote: true, :method => :delete, :class => "btn btn-warning" %> 
       <% end %>
     </div>
   </div>  
