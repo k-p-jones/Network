@@ -14,6 +14,8 @@ It is built in rails 4 and tested with minitest and capybara.
 
 Test ratio is currently 1:1.9
 
+Project URL: [link](http://fierce-temple-64473.herokuapp.com/)
+
 ### Minimum Viable Product
 
 I set myself the task of constructing a web app that had the following functionality:
