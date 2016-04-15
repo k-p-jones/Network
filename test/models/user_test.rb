@@ -7,6 +7,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.save
   end
   
+  
   test "pending_requests should output all friendships that are unconfirmed" do
     @user = users(:me)
     assert_includes @user.pending_requests, friendships(:two)
