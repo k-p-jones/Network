@@ -50,6 +50,14 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     click_link "Sign Out"
   end
 
+  def setup_david_likes 
+    login_david
+    within("#feed_loop") do 
+      first(".fa-thumbs-o-up").click
+    end
+    click_link "Sign Out"
+  end
+
 
   
   test "user logs in and browses site then signs out" do
@@ -275,6 +283,50 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     click_link "Steve Smith"
     within(".profile_wrapper") do 
       assert page.has_content?("End Friendship")
+    end
+  end
+
+  test "user can like a post" do 
+    Capybara.current_driver = :selenium
+    setup_friendship
+    setup_steve_thought
+    login_david
+    within("#feed_loop") do 
+      first(".fa-thumbs-o-up").click
+      sleep(1)
+      assert page.has_css?(".liked")
+      assert page.has_content?("You like this.")
+    end
+  end
+
+  test "user can delete their own like" do 
+    Capybara.current_driver = :selenium
+    setup_friendship
+    setup_steve_thought
+    login_david
+    within("#feed_loop") do 
+      first(".fa-thumbs-o-up").click
+      sleep(1)
+      assert page.has_css?(".liked")
+      assert page.has_content?("You like this.")
+      first(".liked").click
+      sleep(1)
+      assert_not page.has_css?(".liked")
+      assert_not page.has_content?("You like this.")
+    end
+  end
+
+  test "like appears in thought owners feed" do 
+    Capybara.current_driver = :selenium
+    setup_friendship
+    setup_steve_thought
+    setup_david_likes
+    login_steve
+    within("#feed_loop") do 
+      within(".likes") do
+        assert page.has_content?("1")
+      end
+      assert page.has_content?("1 person likes this.")
     end
   end
 end
