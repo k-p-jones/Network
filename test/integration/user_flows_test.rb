@@ -274,7 +274,6 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     end
     click_link "Steve Smith"
     within(".profile_wrapper") do 
-      assert page.has_content?("You are friends!")
       assert page.has_content?("End Friendship")
     end
   end
