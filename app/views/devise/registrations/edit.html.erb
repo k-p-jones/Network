@@ -34,6 +34,14 @@
         <%= f.label :bio %><br />
         <%= f.text_area :bio, autofocus: true, :class => "form-control" %>
       </div>
+
+      <div class="field">
+        <% unless @user.avatar.blank?  %>
+          <%= image_tag @user.avatar.url(:medium) %>
+        <% end %>
+        <%= f.label :avatar, 'Change your profile picture...' %>
+        <%= f.file_field :avatar %>
+      </div>
     
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

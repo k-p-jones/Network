@@ -71,20 +71,24 @@
     <div class="col-sm-8 col-sm-offset-2">
         <div class="thought_wrapper text-center">
             <h3>Find Friends</h3>
-            <table class="table table-striped">
-                <tbody id="users_list">
-                    <% @users.order("last_name ASC").each do |user| %>
-                        <% if user.id != current_user.id %>
-                            <tr>
-                                <td>
-                                     <%= link_to full_name(user), profiles_show_path(:id => user.id) %> 
-                                     <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>
-                                </td>
-                            </tr>
-                        <% end %>
-                    <% end %>    
-                </tbody>
-            </table>
-        </div><!-- end wrapper -->
-    </div><!-- end col -->
-</div><!-- end row -->
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="row">
+            <% @users.order("last_name ASC").each do |user| %>
+                <% if user.id != current_user.id %>
+                    <div class="col-xs-6">
+                        <div class="thought_wrapper text-center">
+                            <%= image_tag user.avatar.url(:network) %>
+                            <br>
+                            <h3><%= link_to full_name(user), profiles_show_path(:id => user.id) %></h3>
+                            <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>      
+</div>

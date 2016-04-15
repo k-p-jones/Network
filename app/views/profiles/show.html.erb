@@ -15,7 +15,7 @@
          <% end %>
         <% @thoughts.each do |thought| %>
             <div class="thought_wrapper">
-                <img src="http://placehold.it/40x40" class="thought_avatar">
+                <%= image_tag @user.avatar.url(:thumb), :class => "thought_avatar" %>
                 <h4><%= link_to "#{ full_name(thought.user) }", profiles_show_path( :id => thought.user_id) %></h4>
                 <p class="text-muted"><%= time_ago_in_words(thought.created_at) %> ago.</p>
                 <div class="comment_counter">

@@ -1,7 +1,6 @@
-
 <div class=" profile_wrapper text-center">
   <!-- Placeholder profile pic -->
-  <img src="http://placehold.it/300x300">
+  <%= image_tag @user.avatar.url(:medium) %>
   <!-- Profile details -->
   <h3><%= full_name(@user) %></h3>
   <h5 class="text-muted">Works as a <%= @user.occupation %>.</h5>
