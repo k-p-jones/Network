@@ -12,9 +12,11 @@ Network is a bare-bones clone of facebook, made with the intention of testing an
 
 It is built in rails 4 and tested with minitest and capybara.
 
+Test ratio is currently 1:1.9
+
 ### Minimum Viable Product
 
-I set my self the task of constructing a web app that had the following functionality:
+I set myself the task of constructing a web app that had the following functionality:
 
 * Users can have an account
 * Users can upload an avatar picture
