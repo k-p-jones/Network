@@ -81,7 +81,9 @@
                 <% if user.id != current_user.id %>
                     <div class="col-xs-6">
                         <div class="thought_wrapper text-center">
-                            <%= image_tag user.avatar.url(:network) %>
+                            <div class="network_avatar">
+                                <%= image_tag user.avatar.url(:network) %>
+                            </div>
                             <br>
                             <h3><%= link_to full_name(user), profiles_show_path(:id => user.id) %></h3>
                             <%= link_to "Add Friend", friendships_path(:friend_id => user.id), :method => :post, :class => "btn btn-success" %>

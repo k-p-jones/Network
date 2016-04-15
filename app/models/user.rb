@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :likes
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "40x40#", network: "200x200#" }, default_url: "http://placehold.it/300x300"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "40x40#", network: "200x200#" }, default_url: "http://placehold.it/40x40"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   
   def pending_requests
